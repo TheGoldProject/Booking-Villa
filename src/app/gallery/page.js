@@ -12,22 +12,22 @@ import lgZoom from "lightgallery/plugins/zoom";
 import Image from "next/image";
 
 export default function Gallery() {
-  useEffect(() => {
-    fjGallery(document.querySelectorAll(".gallery"), {
-      itemSelector: ".gallery__item",
-      rowHeight: 180,
-      lastRow: "start",
-      gutter: 4,
-      rowHeightTolerance: 0.1,
-      calculateItemsHeight: false,
-    });
-  }, []);
+  // useEffect(() => {
+  //   fjGallery(document.querySelectorAll(".gallery"), {
+  //     itemSelector: ".gallery__item",
+  //     rowHeight: 180,
+  //     lastRow: "start",
+  //     gutter: 4,
+  //     rowHeightTolerance: 0.1,
+  //     calculateItemsHeight: false,
+  //   });
+  // }, []);
   return (
     <div className="pb-20">
       <div className="flex flex-col gap-20 w-3/5 mx-auto">
         <section id="gallery" className="mt-20">
           <p>This is gallery</p>
-          <LightGallery
+          {/* <LightGallery
             plugins={[lgZoom]}
             mode="lg-fade"
             elementClassNames={"gallery"}
@@ -50,7 +50,7 @@ export default function Gallery() {
                 />
               </a>
             ))}
-          </LightGallery>
+          </LightGallery> */}
         </section>
       </div>
     </div>
