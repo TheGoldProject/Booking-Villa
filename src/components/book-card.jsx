@@ -8,7 +8,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Minus, Plus } from "lucide-react";
 import { MyContext } from "@/components/context-provider";
 import { Button } from "@/components/ui/button";
-import { CalendarDays, User } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { CalendarDays, User, HandHeart } from "lucide-react";
 import ShineBorder from "@/components/ui/shine-border";
 import axios from "axios";
 import {
@@ -48,6 +49,10 @@ export default function BookCard() {
   });
   const { books, setBooks } = useContext(MyContext);
   const [people, setPeople] = useState({ adults: 0, children: 0, infants: 0 });
+  const [services, setServices] = useState({
+    breakfirst: false,
+    cleaning: false,
+  });
 
   function onChangePeople(type, adjustment) {
     setPeople((prevStates) => ({
@@ -56,8 +61,14 @@ export default function BookCard() {
     }));
   }
 
+  function onChangeService(type, checked) {
+    setServices((prevStates) => ({
+      ...prevStates,
+      [type]: checked, // Update the specific key dynamically
+    }));
+  }
+
   function onSelectDate(e) {
-    console.log(e);
     // setDate(e);
     if (!checkValidDateRange(e, books)) {
       toast({
@@ -278,6 +289,49 @@ export default function BookCard() {
                     <Plus />
                   </Button>
                 </div>
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] justify-start text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
+            >
+              <HandHeart />
+              Services
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-10" align="end">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  checked={services.breakfirst}
+                  onCheckedChange={(e) => onChangeService("breakfirst", e)}
+                />
+                <label
+                  htmlFor="services"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Breakfirst 10$
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  checked={services.cleaning}
+                  onCheckedChange={(e) => onChangeService("cleaning", e)}
+                />
+                <label
+                  htmlFor="services"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Clearning 70$
+                </label>
               </div>
             </div>
           </PopoverContent>
