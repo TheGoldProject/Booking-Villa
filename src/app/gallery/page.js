@@ -6,7 +6,7 @@ import LightGallery from "lightgallery/react";
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 
-import fjGallery from "flickr-justified-gallery";
+// import fjGallery from "flickr-justified-gallery";
 import lgZoom from "lightgallery/plugins/zoom";
 
 import Image from "next/image";
