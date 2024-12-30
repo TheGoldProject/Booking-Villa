@@ -26,7 +26,8 @@ export default function Gallery() {
     <div className="pb-20">
       <div className="flex flex-col gap-20 w-3/5 mx-auto">
         <section id="gallery" className="mt-20">
-          <LightGallery
+          <p>This is gallery</p>
+          {/* <LightGallery
             plugins={[lgZoom]}
             mode="lg-fade"
             elementClassNames={"gallery"}
@@ -49,7 +50,7 @@ export default function Gallery() {
                 />
               </a>
             ))}
-          </LightGallery>
+          </LightGallery> */}
         </section>
       </div>
     </div>
