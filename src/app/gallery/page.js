@@ -1,27 +1,27 @@
 "use client";
 import { useEffect } from "react";
-import LightGallery from "lightgallery/react";
+// import LightGallery from "lightgallery/react";
 
 // import styles
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-zoom.css";
 
-import fjGallery from "flickr-justified-gallery";
+// import fjGallery from "flickr-justified-gallery";
 import lgZoom from "lightgallery/plugins/zoom";
 
 import Image from "next/image";
 
 export default function Gallery() {
-  useEffect(() => {
-    fjGallery(document.querySelectorAll(".gallery"), {
-      itemSelector: ".gallery__item",
-      rowHeight: 180,
-      lastRow: "start",
-      gutter: 4,
-      rowHeightTolerance: 0.1,
-      calculateItemsHeight: false,
-    });
-  }, []);
+  // useEffect(() => {
+  //   fjGallery(document.querySelectorAll(".gallery"), {
+  //     itemSelector: ".gallery__item",
+  //     rowHeight: 180,
+  //     lastRow: "start",
+  //     gutter: 4,
+  //     rowHeightTolerance: 0.1,
+  //     calculateItemsHeight: false,
+  //   });
+  // }, []);
   return (
     <div className="pb-20">
       <div className="flex flex-col gap-20 w-3/5 mx-auto">
