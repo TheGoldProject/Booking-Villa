@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 import { amenities } from "@/data/constants";
 import BookForm from "@/components/book-form";
 import { Check } from "lucide-react";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function Amenities() {
   return (
@@ -37,25 +38,27 @@ export default function Amenities() {
       <p className="text-3xl font-bold mb-4">Amenites of NEW luxury House</p>
       <p className="text-lg">Great facilites!</p>
 
-      <div className="grid grid-cols-3 gap-4 mt-3">
-        {amenities.map((category, i) => (
-          <div key={i} className="flex flex-col gap-1">
-            <div className="flex items-center gap-3 text-xl ">
-              <div>{category.icon}</div>
-              <p>{category.label}</p>
-            </div>
-            {category.items.map((item, j) => (
-              <div
-                key={j}
-                className="flex items-center gap-3 text-md text-zinc-700 p-1"
-              >
-                <Check />
-                <p>{item}</p>
+      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+        <Masonry>
+          {amenities.map((category, i) => (
+            <div key={i} className="flex flex-col gap-1 mt-4">
+              <div className="flex items-center gap-3 text-xl ">
+                <div>{category.icon}</div>
+                <p>{category.label}</p>
               </div>
-            ))}
-          </div>
-        ))}
-      </div>
+              {category.items.map((item, j) => (
+                <div
+                  key={j}
+                  className="flex items-center gap-3 text-md text-zinc-700 p-1"
+                >
+                  <Check />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
     </section>
   );
 }
