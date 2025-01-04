@@ -28,13 +28,13 @@ export const navbarLinks = [
     link: "/",
   },
   {
-    label: "About",
-    link: "/#gallery",
+    label: "Villa Details",
+    link: "/details",
   },
-  {
-    label: "Details",
-    link: "/#details",
-  },
+  // {
+  //   label: "Details",
+  //   link: "/#details",
+  // },
   {
     label: "Reviews",
     link: "/#reviews",
