@@ -3,7 +3,7 @@
 import { navbarLinks } from "@/data/constants";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 const NavbarLinks = navbarLinks.map(({ label, link }) => {
   const [baseLink, hashLink] = link.split("#");
@@ -17,7 +17,8 @@ const NavbarLinks = navbarLinks.map(({ label, link }) => {
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50); // Change background after 50px scroll
@@ -42,7 +43,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 backdrop-blur-sm transition-colors duration-200 text-white text-xl font-bold ${
         isScrolled ? "bg-cyan-400/70" : ""
-      }`}
+      } ${!isHome && "bg-cyan-400/70"}`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center ">
         {/* Logo */}

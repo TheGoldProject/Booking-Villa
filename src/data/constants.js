@@ -41,7 +41,7 @@ export const navbarLinks = [
   },
   {
     label: "Book",
-    link: "/#home",
+    link: "/book",
   },
 ];
 
