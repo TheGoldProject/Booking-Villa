@@ -63,7 +63,7 @@ export default function Book() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto mt-20">
+    <div className="max-w-6xl mx-auto py-20">
       <div className="flex flex-col pt-20">
         <h1 className="text-5xl font-bold">Book Now</h1>
         <p className="text-2xl text-zinc-700">
@@ -219,7 +219,7 @@ export default function Book() {
                       <p>Breakfast $10 (optional)</p>
                     </div>
                     <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
+                      <Check size={30} />
                       <p>Free cancellation before January 27, 2026</p>
                     </div>
                     <div className="flex gap-2 text-red-500">

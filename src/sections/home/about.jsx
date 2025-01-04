@@ -84,7 +84,7 @@ export default function About() {
         ))}
       </div>
 
-      <div className="flex flex-wrap gap-3 mt-10">
+      {/* <div className="flex flex-wrap gap-3 mt-10">
         {mostPopularAmenities.map((item, index) => (
           <div
             key={index}
@@ -94,7 +94,7 @@ export default function About() {
             <p>{item.label}</p>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="flex justify-between items-stretch gap-10 mt-20">
         <div className="flex-1">
@@ -134,14 +134,14 @@ export default function About() {
             ✔ Larnaca International Airport is 37 miles from the property, and
             the property offers a paid airport shuttle service.
           </p>
-          <div className="flex flex-wrap mt-10 gap-x-5 gap-y-3">
+          {/* <div className="flex flex-wrap mt-10 gap-x-5 gap-y-3">
             {mostPopularAmenities.map((item, index) => (
               <div key={index} className="flex items-center gap-3">
                 <span className="text-cyan-500">{item.icon}</span>
                 <span className="text-lg">{item.label}</span>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="overflow-hidden h-96">
           <Marquee pauseOnHover vertical className="[--duration:20s] ">

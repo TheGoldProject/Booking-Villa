@@ -23,9 +23,11 @@ export default function RootLayout({ children }) {
       <body className={`${playfair.variable} ${lato.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <ContextProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+              {children}
+              <Footer />
+            </div>
           </ContextProvider>
         </ThemeProvider>
         <Toaster />

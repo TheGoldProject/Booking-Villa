@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <div className="bg-cyan-400 py-10 mt-20">
+    <footer className="bg-cyan-400 py-10 mt-auto">
       <div className="flex justify-around">
         <div className="">
           <p className="text-3xl text-white">TG Villa</p>
@@ -32,6 +32,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

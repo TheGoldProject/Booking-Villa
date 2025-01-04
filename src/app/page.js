@@ -6,6 +6,8 @@ import { useEffect, useContext } from "react";
 import { MyContext } from "@/components/context-provider";
 import Amenities from "@/sections/home/amenities";
 import Rules from "@/sections/home/rules";
+import Testimonials from "@/sections/home/testimonials";
+import CallToAction from "@/sections/home/call-to-action";
 
 export default function Home() {
   const { books, setBooks } = useContext(MyContext);
@@ -32,7 +34,9 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         <About />
         <Amenities />
-        <Rules />
+        {/* <Rules /> */}
+        <Testimonials />
+        <CallToAction />
       </div>
     </div>
   );

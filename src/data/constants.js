@@ -58,6 +58,45 @@ export const mostPopularAmenities = [
   { icon: <Coffee />, label: "Hot coffee" },
 ];
 
+export const premiumAmenities = [
+  {
+    icon: <Waves />,
+    label: "Shared beach access",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: <CarFront />,
+    label: "Free parking on premises",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: <Dog />,
+    label: "Pets allowed",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: <Fence />,
+    label: "Backyard",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: <Utensils />,
+    label: "Kitchen",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: <LampDesk />,
+    label: "Dedicated workspace",
+    description:
+      "Lorem ipsum dolor sit amet consectetur.",
+  },
+];
+
 export const amenities = [
   {
     icon: <House />,
@@ -294,6 +333,28 @@ export const amenities = [
       "Non-smoking rooms",
     ],
   },
+];
+
+export const testimonials = [
+  {
+    name: "John Doe",
+    role: "CEO",
+    country: "Cyprus",
+    image: "/images/testimonials/1.jpg",
+    rating: 5,
+    date: "2024-01-01",
+    review: "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    name: "John Doe",
+    role: "CEO",
+    country: "Cyprus",
+    image: "/images/testimonials/1.jpg",
+    rating: 5,
+    date: "2024-01-01",
+    review: "Lorem ipsum dolor sit amet consectetur.",
+  },  
+  
 ];
 
 export const RULES = [
