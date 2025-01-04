@@ -62,38 +62,32 @@ export const premiumAmenities = [
   {
     icon: <Waves />,
     label: "Shared beach access",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
   {
     icon: <CarFront />,
     label: "Free parking on premises",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
   {
     icon: <Dog />,
     label: "Pets allowed",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
   {
     icon: <Fence />,
     label: "Backyard",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
   {
     icon: <Utensils />,
     label: "Kitchen",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
   {
     icon: <LampDesk />,
     label: "Dedicated workspace",
-    description:
-      "Lorem ipsum dolor sit amet consectetur.",
+    description: "Lorem ipsum dolor sit amet consectetur.",
   },
 ];
 
@@ -343,7 +337,8 @@ export const testimonials = [
     image: "/images/testimonials/1.jpg",
     rating: 5,
     date: "2024-01-01",
-    review: "Lorem ipsum dolor sit amet consectetur.",
+    review:
+      "We stayed at Theofilos Georgiou’s villa in Limassol, and it was absolutely outstanding! The villa is brand new, spotless, and fully equipped with...",
   },
   {
     name: "John Doe",
@@ -352,9 +347,9 @@ export const testimonials = [
     image: "/images/testimonials/1.jpg",
     rating: 5,
     date: "2024-01-01",
-    review: "Lorem ipsum dolor sit amet consectetur.",
-  },  
-  
+    review:
+      "The villa was absolutely beautiful, just as it appears in the photos. Our host, Theofilis met us on arrival, to show us around. He was very warm...",
+  },
 ];
 
 export const RULES = [
