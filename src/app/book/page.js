@@ -63,22 +63,24 @@ export default function Book() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto py-20">
-      <div className="flex flex-col pt-20">
-        <h1 className="text-5xl font-bold">Book Now</h1>
-        <p className="text-2xl text-zinc-700">
+    <div className="max-w-7xl mx-auto py-20">
+      <div class="mb-10 mt-10">
+        <h2 class="mb-4 text-center text-3xl font-extrabold italic text-gray-900 md:mb-6 lg:text-5xl">
+          Book Now
+        </h2>
+        <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-xl italic">
           Book your appointment with us today and experience the best service in
           town.
         </p>
       </div>
-      <div className="flex flex-col gap-5">
-        <div className="flex gap-5 mt-10">
+      <div className="flex flex-col items-center gap-5">
+        <div className="flex mt-10">
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-[240px] justify-start text-left font-normal",
+                  "w-[240px] h-12 border-zinc-500 rounded-tr-none rounded-br-none justify-start text-left font-normal ",
                   !date && "text-muted-foreground"
                 )}
               >
@@ -114,7 +116,7 @@ export default function Book() {
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-[240px] justify-start text-left font-normal",
+                  "w-[240px] h-12 border-zinc-500 rounded-tl-none rounded-bl-none justify-start text-left font-normal ",
                   !date && "text-muted-foreground"
                 )}
               >
@@ -153,9 +155,13 @@ export default function Book() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[200px]">Accommodation Type</TableHead>
+                  <TableHead className="w-[200px]">
+                    Accommodation Type
+                  </TableHead>
                   <TableHead className="w-[150px]">Number of Guests</TableHead>
-                  <TableHead className="w-[200px]">Price for {nights} days</TableHead>
+                  <TableHead className="w-[200px]">
+                    Price for {nights} days
+                  </TableHead>
                   <TableHead className="w-[200px]">Your Choices</TableHead>
                   <TableHead className="w-[300px]">Reserve</TableHead>
                 </TableRow>

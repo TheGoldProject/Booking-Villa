@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { Playfair_Display, Lato } from "next/font/google";
+import { Playfair_Display, Lato, Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ContextProvider } from "@/components/context-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -8,9 +8,16 @@ import "./globals.css";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
 });
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: '--font-poppins',
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${lato.variable} antialiased`}>
+      <body className={`${playfair.variable} ${lato.variable} ${poppins.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <ContextProvider>
             <div className="min-h-screen flex flex-col">
