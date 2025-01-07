@@ -26,6 +26,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useBooking } from "@/components/context-provider";
+import { useScroll } from "@/hooks/use-scroll";
 
 const checkValidDateRange = (selected, bookedArray) => {
   if (!selected.from || !selected.to) {
@@ -43,42 +45,27 @@ const checkValidDateRange = (selected, bookedArray) => {
 };
 export default function BookCard() {
   const { toast } = useToast();
-  const [date, setDate] = useState({
-    from: undefined,
-    to: undefined,
-  });
-  const { books, setBooks } = useContext(MyContext);
-  const [people, setPeople] = useState({ adults: 0, children: 0, infants: 0 });
-  const [services, setServices] = useState({
-    breakfirst: false,
-    cleaning: false,
-  });
+  const { scrollToSection } = useScroll();
+  const { books, setBooks, date, setDate, people, updatePeople } = useBooking();
 
-  function onChangePeople(type, adjustment) {
-    setPeople((prevStates) => ({
-      ...prevStates,
-      [type]: prevStates[type] + adjustment, // Update the specific key dynamically
-    }));
-  }
-
-  function onChangeService(type, checked) {
-    setServices((prevStates) => ({
-      ...prevStates,
-      [type]: checked, // Update the specific key dynamically
-    }));
-  }
-
-  function onSelectDate(e) {
-    // setDate(e);
-    if (!checkValidDateRange(e, books)) {
-      toast({
-        variant: "destructive",
-        title: "Oh! You selected dates that already booked.",
-        description: "Please select again.",
+  const [open, setOpen] = useState(false); 
+  
+  const handleOpenChange = (isOpen) => {
+    setOpen(isOpen);
+    if (isOpen) {
+      setDate({
+        from: undefined,
+        to: undefined,
       });
-      setDate({ from: undefined, to: undefined });
     }
-  }
+  };
+
+  const handleSelect = (selectedDate) => {
+    setDate(selectedDate);
+    if (selectedDate.from && selectedDate.to) {
+      setOpen(false);
+    }
+  };
 
   const matcher = [
     // Disable all days before today
@@ -91,29 +78,29 @@ export default function BookCard() {
     }),
   ];
 
-  const handleSubmit = async () => {
-    try {
-      if (checkValidDateRange(date, books)) {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/books/book`,
-          date
-        );
-        toast({
-          variant: "success",
-          title: "Your request is successfully reserved!",
-        });
-        console.log("Response:", response.data);
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Oh! You selected dates that already booked.",
-          description: "Please select again.",
-        });
-      }
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     if (checkValidDateRange(date, books)) {
+  //       const response = await axios.post(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/books/book`,
+  //         date
+  //       );
+  //       toast({
+  //         variant: "success",
+  //         title: "Your request is successfully reserved!",
+  //       });
+  //       console.log("Response:", response.data);
+  //     } else {
+  //       toast({
+  //         variant: "destructive",
+  //         title: "Oh! You selected dates that already booked.",
+  //         description: "Please select again.",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error sending data:", error);
+  //   }
+  // };
   return (
     <ShineBorder
       className="rounded-lg bg-background/70 md:shadow-xl p-10 backdrop-blur-sm"
@@ -144,7 +131,7 @@ export default function BookCard() {
               mode="range"
               defaultMonth={new Date()}
               selected={date}
-              onSelect={setDate}
+              onSelect={handleSelect}
               numberOfMonths={2}
               modifiers={{ disabled: matcher }}
               modifiersClassNames={{
@@ -180,8 +167,7 @@ export default function BookCard() {
               mode="range"
               defaultMonth={new Date()}
               selected={date}
-              onSelect={setDate}
-              // onSelect={(e) => onSelectDate(e)}
+              onSelect={handleSelect}
               numberOfMonths={2}
               modifiers={{ disabled: matcher }}
               modifiersClassNames={{
@@ -218,7 +204,7 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("adults", -1)}
+                    onClick={() => updatePeople("adults", -1)}
                     disabled={people.adults <= 0}
                   >
                     <Minus />
@@ -230,8 +216,8 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("adults", 1)}
-                    disabled={people.adults >= 5}
+                    onClick={() => updatePeople("adults", 1)}
+                    disabled={people.adults >= 6}
                   >
                     <Plus />
                   </Button>
@@ -244,7 +230,7 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("children", -1)}
+                    onClick={() => updatePeople("children", -1)}
                     disabled={people.children <= 0}
                   >
                     <Minus />
@@ -256,8 +242,8 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("children", 1)}
-                    disabled={people.children >= 5}
+                    onClick={() => updatePeople("children", 1)}
+                    disabled={people.children >= 6}
                   >
                     <Plus />
                   </Button>
@@ -271,7 +257,7 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("infants", -1)}
+                    onClick={() => updatePeople("infants", -1)}
                     disabled={people.infants <= 0}
                   >
                     <Minus />
@@ -283,8 +269,8 @@ export default function BookCard() {
                     variant="outline"
                     size="icon"
                     className="rounded-full hover:border-black"
-                    onClick={() => onChangePeople("infants", 1)}
-                    disabled={people.infants >= 5}
+                    onClick={() => updatePeople("infants", 1)}
+                    disabled={people.infants >= 2}
                   >
                     <Plus />
                   </Button>
@@ -294,7 +280,7 @@ export default function BookCard() {
           </PopoverContent>
         </Popover>
 
-        <Popover>
+        {/* <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
@@ -335,9 +321,14 @@ export default function BookCard() {
               </div>
             </div>
           </PopoverContent>
-        </Popover>
+        </Popover> */}
 
-        <Button onClick={handleSubmit} className="h-12 text-xl">Reserve</Button>
+        <Button
+          onClick={(e) => scrollToSection(e, "call-to-action")}
+          className="h-12 text-xl"
+        >
+          Check Availability
+        </Button>
       </div>
     </ShineBorder>
     // <div className="flex flex-col gap-10 py-10">

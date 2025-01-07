@@ -46,6 +46,7 @@ import Marquee from "@/components/ui/marquee";
 import BookForm from "@/components/book-form";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
+import { premiumServices } from "@/data/constants";
 
 const reviews = [
   {
@@ -238,14 +239,30 @@ export default function About() {
             the property, and the property offers a paid airport shuttle
             service.
           </p>
-          {/* <div className="flex flex-wrap mt-10 gap-x-5 gap-y-3">
-            {mostPopularAmenities.map((item, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <span className="text-cyan-500">{item.icon}</span>
+          <h1 className="text-2xl italic font-bold mt-10">Premium Services</h1>
+          <div className="flex flex-wrap mt-2 gap-x-5 gap-y-3">
+            {premiumServices.map((item, index) => (
+              <div
+                key={index}
+                className="flex relative items-center gap-3 p-3 bg-gray-100 rounded-md border border-zinc-300 flex-grow"
+              >
+                <Image
+                  src={item.icon}
+                  alt={item.label}
+                  width={30}
+                  height={20}
+                />
                 <span className="text-lg">{item.label}</span>
+                <Image
+                  src="/icons/hot.svg"
+                  alt="Hot"
+                  width={30}
+                  height={20}
+                  className="absolute top-0 right-0"
+                />
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
         <div>
           <Card className="bg-blue-50 p-6 space-y-6">

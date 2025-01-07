@@ -9,10 +9,10 @@ import Rules from "@/sections/home/rules";
 import Testimonials from "@/sections/home/testimonials";
 import CallToAction from "@/sections/home/call-to-action";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
-
+import { useBooking } from "@/components/context-provider";
 
 export default function Home() {
-  const { books, setBooks } = useContext(MyContext);
+  const { books, setBooks } = useBooking();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,13 +34,12 @@ export default function Home() {
     <div className="pb-20">
       <Hero />
       <div className="max-w-6xl mx-auto">
+        <CallToAction />
         <About />
         <Amenities />
         {/* <Rules /> */}
         <Testimonials />
-        <CallToAction />
         <FloatingWhatsApp phoneNumber="5555555555" />
-
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Playfair_Display, Lato, Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ContextProvider } from "@/components/context-provider";
+import { BookingProvider } from "@/components/context-provider";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
@@ -31,13 +31,13 @@ export default function RootLayout({ children }) {
         className={`${playfair.variable} ${lato.variable} ${poppins.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="light">
-          <ContextProvider>
+          <BookingProvider>
             <div className="min-h-screen flex flex-col">
               <Navbar />
               {children}
               <Footer />
             </div>
-          </ContextProvider>
+          </BookingProvider>
         </ThemeProvider>
         <Toaster />
       </body>

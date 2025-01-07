@@ -18,9 +18,10 @@ import {
   Minus,
   Plus,
   RefreshCwOff,
+  Coffee,
 } from "lucide-react";
 import { useState, useContext } from "react";
-import { MyContext } from "@/components/context-provider";
+import { useBooking } from "@/components/context-provider";
 import {
   Table,
   TableHeader,
@@ -36,6 +37,8 @@ import {
   addDays,
   differenceInDays,
 } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 
 const checkValidDateRange = (selected, bookedArray) => {
   if (!selected.from || !selected.to) {
@@ -53,13 +56,10 @@ const checkValidDateRange = (selected, bookedArray) => {
 };
 
 export default function Book() {
-  const [date, setDate] = useState({
-    from: undefined,
-    to: undefined,
-  });
-  const [people, setPeople] = useState({ adults: 0, children: 0, infants: 0 });
+  const { date, setDate, people, setPeople, updatePeople, books, setBooks } =
+    useBooking();
   const nights = differenceInDays(date?.to, date?.from);
-  const { books, setBooks } = useContext(MyContext);
+  const guests = people.adults + people.children;
 
   const [open, setOpen] = useState(false); // Add this state for popover control
 
@@ -79,13 +79,6 @@ export default function Book() {
       });
     }
   };
-
-  function onChangePeople(type, adjustment) {
-    setPeople((prevStates) => ({
-      ...prevStates,
-      [type]: prevStates[type] + adjustment, // Update the specific key dynamically
-    }));
-  }
 
   const matcher = [
     // Disable all days before today
@@ -208,7 +201,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("adults", -1)}
+                      onClick={() => updatePeople("adults", -1)}
                       disabled={people.adults <= 0}
                     >
                       <Minus />
@@ -220,7 +213,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("adults", 1)}
+                      onClick={() => updatePeople("adults", 1)}
                       disabled={people.adults >= 5}
                     >
                       <Plus />
@@ -234,7 +227,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("children", -1)}
+                      onClick={() => updatePeople("children", -1)}
                       disabled={people.children <= 0}
                     >
                       <Minus />
@@ -246,7 +239,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("children", 1)}
+                      onClick={() => updatePeople("children", 1)}
                       disabled={people.children >= 5}
                     >
                       <Plus />
@@ -261,7 +254,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("infants", -1)}
+                      onClick={() => updatePeople("infants", -1)}
                       disabled={people.infants <= 0}
                     >
                       <Minus />
@@ -273,7 +266,7 @@ export default function Book() {
                       variant="outline"
                       size="icon"
                       className="rounded-full hover:border-black"
-                      onClick={() => onChangePeople("infants", 1)}
+                      onClick={() => updatePeople("infants", 1)}
                       disabled={people.infants >= 5}
                     >
                       <Plus />
@@ -285,7 +278,310 @@ export default function Book() {
           </Popover>
         </div>
 
-        {date?.from && date?.to && (
+        {guests > 0 && date?.from && date?.to && (
+          <div className="mt-10">
+            <div class="bg-white py-6 sm:py-8 lg:py-12">
+              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
+                <Image
+                  src="/icons/hot.svg"
+                  alt="Hot"
+                  width={100}
+                  height={100}
+                  className="absolute top-0 right-0"
+                />
+                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                    <Image
+                      src="/images/villa/40.jpg"
+                      alt="Photo by Dom Hill"
+                      width={1000}
+                      height={500}
+                      // fill
+                      // className="object-cover object-center"
+                    />
+                  </div>
+                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
+                      <h2 class="font-bold italic">Two Bedroom Villa</h2>
+                      <div className="flex items-center gap-1">
+                        <p>(</p>
+                        {/* <UserRound /> */}
+                        <p> {guests} guests</p>
+                        <p>, {nights} nights</p>
+                        <p>)</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <p className="text-red-500 line-through">$2000</p>
+                      <p className="text-4xl font-bold">$1500</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 1: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 2: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Check />
+                        <p>Free Cancellation Before 14 days</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Coffee />
+                        <p>Breakfast Included</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <RefreshCwOff size={20} />
+                        <p>Non-refundable</p>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-end mt-auto">
+                      <Link href="/book">
+                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                          Reserve
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1 className="text-3xl font-bold mt-10">Other Popular Options</h1>
+            <div class="bg-white py-6 sm:py-8 lg:py-12">
+              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                    <Image
+                      src="/images/villa/33.jpg"
+                      alt="Photo by Dom Hill"
+                      width={1000}
+                      height={500}
+                      // fill
+                      // className="object-cover object-center"
+                    />
+                  </div>
+                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
+                      <h2 class="font-bold italic">
+                        Executive Two Bedroom Villa
+                      </h2>
+                      <div className="flex items-center gap-1">
+                        <p>(</p>
+                        {/* <UserRound /> */}
+                        <p> {guests + 1} guests</p>
+                        <p>, {nights} nights</p>
+                        <p>)</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <p className="text-red-500 line-through">$2000</p>
+                      <p className="text-4xl font-bold">$1500</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 1: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 2: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Check />
+                        <p>Free Cancellation Before 14 days</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Coffee />
+                        <p>Breakfast Included</p>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-end mt-auto">
+                      <Link href="/book">
+                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                          Reserve
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white py-6 sm:py-8 lg:py-12">
+              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                    <Image
+                      src="/images/villa/34.jpg"
+                      alt="Photo by Dom Hill"
+                      width={1000}
+                      height={500}
+                      // fill
+                      // className="object-cover object-center"
+                    />
+                  </div>
+                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
+                      <h2 class="font-bold italic">Three Bedroom Villa</h2>
+                      <div className="flex items-center gap-1">
+                        <p>(</p>
+                        {/* <UserRound /> */}
+                        <p> 6 guests</p>
+                        <p>, {nights} nights</p>
+                        <p>)</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <p className="text-red-500 line-through">$2000</p>
+                      <p className="text-4xl font-bold">$1500</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 1: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 2: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Check />
+                        <p>Free Cancellation Before 14 days</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Coffee />
+                        <p>Breakfast Included</p>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-end mt-auto">
+                      <Link href="/book">
+                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                          Reserve
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white py-6 sm:py-8 lg:py-12">
+              <div class="mx-auto max-w-screen-2xl shadow-lg">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                    <Image
+                      src="/images/villa/35.jpg"
+                      alt="Photo by Dom Hill"
+                      width={1000}
+                      height={500}
+                      // fill
+                      // className="object-cover object-center"
+                    />
+                  </div>
+                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
+                      <h2 class="font-bold italic">
+                        Executive Three Bedroom Villa
+                      </h2>
+                      <div className="flex items-center gap-1">
+                        <p>(</p>
+                        {/* <UserRound /> */}
+                        <p> 6 guests</p>
+                        <p>, {nights} nights</p>
+                        <p>)</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <p className="text-red-500 line-through">$2000</p>
+                      <p className="text-4xl font-bold">$1500</p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 1: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <p>Bedroom 2: King Bed</p>
+                        <Image
+                          src="/icons/bedroom.svg"
+                          alt="Check"
+                          width={20}
+                          height={20}
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Check />
+                        <p>Free Cancellation Before 14 days</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-green-600">
+                        <Coffee />
+                        <p>Breakfast Included</p>
+                      </div>
+                    </div>
+
+                    <div class="flex justify-end mt-auto">
+                      <Link href="/book">
+                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                          Reserve
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* {date?.from && date?.to && (
           <div className="mt-10">
             <Table>
               <TableHeader>
@@ -476,7 +772,7 @@ export default function Book() {
               </TableBody>
             </Table>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -168,26 +168,40 @@ export default function Details() {
             </MagicCard>
 
             <MagicCard
-              className="cursor-pointer p-5 whitespace-nowrap"
+              className="cursor-pointer whitespace-nowrap w-full"
               gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
             >
-              <div className="flex gap-2 items-center mb-10">
-                <MapPinHouse />
-                <h1 className="text-2xl font-bold">Property Address</h1>
-              </div>
+              <div className="flex w-full">
+                <div className="w-1/2 p-5 ">
+                  <div className="flex gap-2 items-center mb-10">
+                    <MapPinHouse />
+                    <h1 className="text-2xl font-bold">Property Address</h1>
+                  </div>
 
-              <div className="flex flex-col gap-2">
-                <div className="flex gap-2">
-                  <span className="font-bold">Address:</span>
-                  <span>Agios Tychon, Limassol, Cyprus</span>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex gap-2">
+                      <span className="font-bold">Address:</span>
+                      <span>Agios Tychon, Limassol, Cyprus</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="font-bold">City:</span>
+                      <span>Limassol</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="font-bold">Country:</span>
+                      <span>Cyprus</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">City:</span>
-                  <span>Limassol</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Country:</span>
-                  <span>Cyprus</span>
+                <div className="w-1/2">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d260534.52747512204!2d17.701880006374193!3d59.32584138311499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f763119640bcb%3A0xa80d27d3679d7766!2sStockholm!5e0!3m2!1sen!2sse!4v1666978319596!5m2!1sen!2sse"
+                    style={{ border: 0 }}
+                    allowFullScreen={false}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  ></iframe>
                 </div>
               </div>
             </MagicCard>
@@ -199,6 +213,53 @@ export default function Details() {
               <div className="flex gap-2 items-center mb-10">
                 <NotepadText />
                 <h1 className="text-2xl font-bold">Property Details</h1>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2">
+                  <span className="font-bold">Property Size:</span>
+                  <span>350 m2</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Bedrooms:</span>
+                  <span>3</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Bathrooms:</span>
+                  <span>3</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Outdoor Facilities:</span>
+                  <span>
+                    Pool, Outdoor Hot Tub, Sauna, BBQ Area, Seating Areas,
+                    Outdoor Dining
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Check-In Time:</span>
+                  <span>14:00</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Check-Out Time:</span>
+                  <span>12:00</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-bold">Optional Services:</span>
+                  <span>
+                    Airport Transfer, Private Chef, Private Driver, Private
+                    Security, Private Yoga Instructor, Private Massage
+                  </span>
+                </div>
+              </div>
+            </MagicCard>
+
+            <MagicCard
+              className="cursor-pointer p-5 whitespace-nowrap"
+              gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
+            >
+              <div className="flex gap-2 items-center mb-10">
+                <NotepadText />
+                <h1 className="text-2xl font-bold">Amenities</h1>
               </div>
 
               <div className="flex flex-col gap-2">

@@ -58,6 +58,34 @@ export const mostPopularAmenities = [
   { icon: <Coffee />, label: "Hot coffee" },
 ];
 
+export const premiumServices = [
+  {
+    icon: "/icons/towel.svg",
+    label: "2hrs extra sauna",
+    description: "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: "/icons/bathroom.svg",
+    label: "2hrs extra jacuzzi",
+    description: "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: "/icons/heater.svg",
+    label: "More warm pool",
+    description: "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: "/icons/food.svg",
+    label: "Fruit platters",
+    description: "Lorem ipsum dolor sit amet consectetur.",
+  },
+  {
+    icon: "/icons/terrace.svg",
+    label: "Breakfast in the terrace",
+    description: "Lorem ipsum dolor sit amet consectetur.",
+  },
+];
+
 export const premiumAmenities = [
   {
     icon: <Waves />,

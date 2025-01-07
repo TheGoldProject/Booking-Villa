@@ -4,6 +4,7 @@ import { navbarLinks } from "@/data/constants";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useScroll } from "@/hooks/use-scroll";
 
 const NavbarLinks = navbarLinks.map(({ label, link }) => {
   const [baseLink, hashLink] = link.split("#");
@@ -19,6 +20,8 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const { scrollToSection } = useScroll();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50); // Change background after 50px scroll
@@ -30,14 +33,6 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const scrollToSection = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <header
@@ -63,15 +58,15 @@ export default function Navbar() {
                 key={i}
                 href={item.baseLink}
                 onClick={(e) => scrollToSection(e, item.hashLink)}
-                className="border-b-2 border-transparent transition-all duration-500 hover:border-white"
+                className="border-b-2 border-transparent hover:border-white"
               >
                 {item.label}
               </Link>
             ) : (
               <Link
-                className="border-b-2 border-transparent transition-all duration-500 hover:border-white"
                 key={i}
                 href={item.baseLink}
+                className="border-b-2 border-transparent hover:border-white"
               >
                 {item.label}
               </Link>
