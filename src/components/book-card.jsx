@@ -119,14 +119,14 @@ export default function BookCard() {
       className="rounded-lg bg-background/70 md:shadow-xl p-10 backdrop-blur-sm"
       color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
     >
-      <h1 className="text-3xl font-bold mb-5">Book Now</h1>
+      <h1 className="text-4xl font-extrabold mb-5">Book Now</h1>
       <div className="flex flex-col gap-5">
         <Popover>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
               className={cn(
-                "w-[240px] justify-start text-left font-normal",
+                "w-80 h-12 border-zinc-500 justify-start text-left font-normal",
                 !date && "text-muted-foreground"
               )}
             >
@@ -162,7 +162,7 @@ export default function BookCard() {
             <Button
               variant={"outline"}
               className={cn(
-                "w-[240px] justify-start text-left font-normal",
+                "w-80 h-12 border-zinc-500 justify-start text-left font-normal",
                 !date && "text-muted-foreground"
               )}
             >
@@ -201,7 +201,7 @@ export default function BookCard() {
             <Button
               variant={"outline"}
               className={cn(
-                "w-[240px] justify-start text-left font-normal",
+                "w-80 h-12 border-zinc-500 justify-start text-left font-normal",
                 !date && "text-muted-foreground"
               )}
             >
@@ -299,7 +299,7 @@ export default function BookCard() {
             <Button
               variant={"outline"}
               className={cn(
-                "w-[240px] justify-start text-left font-normal",
+                "w-80 h-12 border-zinc-500 justify-start text-left font-normal",
                 !date && "text-muted-foreground"
               )}
             >
@@ -337,7 +337,7 @@ export default function BookCard() {
           </PopoverContent>
         </Popover>
 
-        <Button onClick={handleSubmit}>Reserve</Button>
+        <Button onClick={handleSubmit} className="h-12 text-xl">Reserve</Button>
       </div>
     </ShineBorder>
     // <div className="flex flex-col gap-10 py-10">

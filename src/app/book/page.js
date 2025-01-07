@@ -6,10 +6,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, HandCoins, Tag } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { HandHeart, User, Soup, Check, X } from "lucide-react";
+import {
+  HandHeart,
+  User,
+  Soup,
+  Check,
+  X,
+  Minus,
+  Plus,
+  RefreshCwOff,
+} from "lucide-react";
 import { useState, useContext } from "react";
 import { MyContext } from "@/components/context-provider";
 import {
@@ -48,8 +57,35 @@ export default function Book() {
     from: undefined,
     to: undefined,
   });
+  const [people, setPeople] = useState({ adults: 0, children: 0, infants: 0 });
   const nights = differenceInDays(date?.to, date?.from);
   const { books, setBooks } = useContext(MyContext);
+
+  const [open, setOpen] = useState(false); // Add this state for popover control
+
+  const handleSelect = (selectedDate) => {
+    setDate(selectedDate);
+    if (selectedDate.from && selectedDate.to) {
+      setOpen(false);
+    }
+  };
+
+  const handleOpenChange = (isOpen) => {
+    setOpen(isOpen);
+    if (isOpen) {
+      setDate({
+        from: undefined,
+        to: undefined,
+      });
+    }
+  };
+
+  function onChangePeople(type, adjustment) {
+    setPeople((prevStates) => ({
+      ...prevStates,
+      [type]: prevStates[type] + adjustment, // Update the specific key dynamically
+    }));
+  }
 
   const matcher = [
     // Disable all days before today
@@ -74,8 +110,8 @@ export default function Book() {
         </p>
       </div>
       <div className="flex flex-col items-center gap-5">
-        <div className="flex mt-10">
-          <Popover>
+        <div className="flex mt-2">
+          <Popover open={open} onOpenChange={handleOpenChange}>
             <PopoverTrigger asChild>
               <Button
                 variant={"outline"}
@@ -98,7 +134,7 @@ export default function Book() {
                 mode="range"
                 defaultMonth={new Date()}
                 selected={date}
-                onSelect={setDate}
+                onSelect={handleSelect}
                 numberOfMonths={2}
                 modifiers={{ disabled: matcher }}
                 modifiersClassNames={{
@@ -149,7 +185,106 @@ export default function Book() {
               />
             </PopoverContent>
           </Popover>
+
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[240px] h-12 border-zinc-500 justify-start text-left font-normal ml-4",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <User />
+                {people.adults + people.children} guests
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 p-10" align="end">
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-between items-center">
+                  <div className="text-xl">Adults</div>
+                  <div className="flex items-center justify-center gap-4">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("adults", -1)}
+                      disabled={people.adults <= 0}
+                    >
+                      <Minus />
+                    </Button>
+                    <div className="flex-1 text-center">
+                      <div className="text-xl ">{people.adults}</div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("adults", 1)}
+                      disabled={people.adults >= 5}
+                    >
+                      <Plus />
+                    </Button>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="text-xl">Children</div>
+                  <div className="flex items-center justify-center gap-4">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("children", -1)}
+                      disabled={people.children <= 0}
+                    >
+                      <Minus />
+                    </Button>
+                    <div className="flex-1 text-center">
+                      <div className="text-xl ">{people.children}</div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("children", 1)}
+                      disabled={people.children >= 5}
+                    >
+                      <Plus />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="text-xl">Infants</div>
+                  <div className="flex items-center justify-center gap-4">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("infants", -1)}
+                      disabled={people.infants <= 0}
+                    >
+                      <Minus />
+                    </Button>
+                    <div className="flex-1 text-center">
+                      <div className="text-xl ">{people.infants}</div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-full hover:border-black"
+                      onClick={() => onChangePeople("infants", 1)}
+                      disabled={people.infants >= 5}
+                    >
+                      <Plus />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
+
         {date?.from && date?.to && (
           <div className="mt-10">
             <Table>
@@ -159,10 +294,10 @@ export default function Book() {
                     Accommodation Type
                   </TableHead>
                   <TableHead className="w-[150px]">Number of Guests</TableHead>
-                  <TableHead className="w-[200px]">
+                  <TableHead className="w-[180px]">
                     Price for {nights} days
                   </TableHead>
-                  <TableHead className="w-[200px]">Your Choices</TableHead>
+                  <TableHead className="w-[250px]">Your Choices</TableHead>
                   <TableHead className="w-[300px]">Reserve</TableHead>
                 </TableRow>
               </TableHeader>
@@ -206,31 +341,48 @@ export default function Book() {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 2
+                  <TableCell className="align-top">
+                    <div className="flex items-start">
+                      <User size={20} /> × {people.adults + people.children}
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
+                  <TableCell className="align-top">
+                    <div className="flex flex-col pb-20">
+                      <p className="text-red-500 line-through">
+                        ${nights * 500}
+                      </p>
+                      <p className="text-xl font-bold">${nights * 400}</p>
+                      <span className="bg-cyan-400 text-white rounded-sm px-1 py-0.5 max-w-fit">
+                        10% off
+                      </span>
+
+                      <p className="text-xs text-zinc-700 mt-2">
+                        <span className="font-bold">Included:</span> $70
+                        cleaning fee per stay
+                      </p>
+                      <p className="text-xs text-zinc-700 mt-2">
+                        <span className="font-bold">Excluded:</span> 9% VAT
+                      </p>
+                    </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={30} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
+                  <TableCell className="align-top">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        <Soup size={20} />
+                        <p>Breakfast $10 (optional)</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <RefreshCwOff size={20} />
+                        <p>Non-refundable</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <HandCoins size={20} />
+                        <p>Pay Online</p>
+                      </div>
+                      <div className="flex gap-2 text-cyan-400">
+                        <Tag size={20} />
+                        <p>Premium Member discount maybe available</p>
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell rowSpan={6} className="align-top">
@@ -276,151 +428,48 @@ export default function Book() {
                 </TableRow>
 
                 <TableRow className="cursor-pointer">
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 2
+                  <TableCell className="align-top">
+                    <div className="flex items-start">
+                      <User size={20} /> × {people.adults + people.children}
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                  <TableCell className="align-top">
+                    <div className="flex flex-col pb-20">
+                      <p className="text-red-500 line-through">
+                        ${nights * 450}
+                      </p>
+                      <p className="text-xl font-bold">${nights * 430}</p>
+                      <span className="bg-cyan-400 text-white rounded-sm px-1 py-0.5 max-w-fit">
+                        10% off
+                      </span>
 
-                <TableRow className="cursor-pointer">
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 3
+                      <p className="text-xs text-zinc-700 mt-2">
+                        <span className="font-bold">Included:</span> $70
+                        cleaning fee per stay
+                      </p>
+                      <p className="text-xs text-zinc-700 mt-2">
+                        <span className="font-bold">Excluded:</span> 9% VAT
+                      </p>
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow className="cursor-pointer">
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 4
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow className="cursor-pointer">
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 5
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
-                    </div>
-                  </TableCell>
-                </TableRow>
-
-                <TableRow className="cursor-pointer">
-                  <TableCell>
-                    <div className="flex items-center">
-                      <User size={20} /> × 6
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <p className="text-red-500 line-through">${nights * 500}</p>
-                    <p className="text-xl font-bold">${nights * 400}</p>
-                    <p className="text-sm text-zinc-500">
-                      Included: $70 cleaning fee per stay
-                    </p>
-                    <p className="text-sm text-zinc-500">Excluded: 9% VAT</p>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Soup size={20} />
-                      <p>Breakfast $10 (optional)</p>
-                    </div>
-                    <div className="flex gap-2 text-green-500">
-                      <Check size={20} />
-                      <p>Free cancellation before January 27, 2026</p>
-                    </div>
-                    <div className="flex gap-2 text-red-500">
-                      <X size={20} />
-                      <p>No-show fee $100</p>
+                  <TableCell className="align-top">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        <Soup size={20} />
+                        <p>Breakfast $10 (optional)</p>
+                      </div>
+                      <div className="flex gap-2 text-green-500">
+                        <Check size={20} className="text-green-500" />
+                        <p>Free cancellation before January 27, 2026</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <HandCoins size={20} />
+                        <p>Pay nothing now</p>
+                      </div>
+                      <div className="flex gap-2 text-cyan-400">
+                        <Tag size={20} />
+                        <p>Premium Member discount maybe available</p>
+                      </div>
                     </div>
                   </TableCell>
                 </TableRow>

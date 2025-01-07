@@ -36,7 +36,7 @@ export default function Hero() {
         }}
         plugins={[
           Autoplay({
-            delay: 3000,
+            delay: 5000,
           }),
           Fade(),
         ]}
@@ -50,7 +50,7 @@ export default function Hero() {
                 alt={index}
                 className="object-cover"
               />
-              <div className="flex flex-col gap-5 absolute top-48 left-32">
+              <div className="flex flex-col gap-5 absolute top-48 left-48">
                 <BlurFade delay={0.8} inView>
                   <h1 className="font-serif font-bold text-8xl text-white">
                     The Paradise
@@ -67,7 +67,7 @@ export default function Hero() {
         </CarouselContent>
       </Carousel>
       <div className="absolute inset-0 bg-opacity-50"></div>
-      <div className="absolute inset-0 z-10 flex flex-col items-end justify-center h-full text-center pb-28">
+      <div className="absolute inset-0 z-10 flex flex-col items-end justify-center h-full text-center">
         {/* <MorphingText className="font-serif text-9xl text-white" texts={hero} /> */}
 
         {/* <Drawer>
@@ -87,7 +87,7 @@ export default function Hero() {
             </div>
           </DrawerContent>
         </Drawer> */}
-        <div className="mr-40">
+        <div className="mr-[20%]">
           <BookCard />
         </div>
       </div>

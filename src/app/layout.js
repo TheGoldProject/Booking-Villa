@@ -16,7 +16,7 @@ const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: '--font-poppins',
+  variable: "--font-poppins",
 });
 
 export const metadata = {
@@ -27,7 +27,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${lato.variable} ${poppins.variable} antialiased`}>
+      <body
+        className={`${playfair.variable} ${lato.variable} ${poppins.variable} antialiased`}
+      >
         <ThemeProvider attribute="class" defaultTheme="light">
           <ContextProvider>
             <div className="min-h-screen flex flex-col">

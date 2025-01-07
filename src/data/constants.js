@@ -350,6 +350,16 @@ export const testimonials = [
     review:
       "The villa was absolutely beautiful, just as it appears in the photos. Our host, Theofilis met us on arrival, to show us around. He was very warm...",
   },
+  {
+    name: "John Doe",
+    role: "CEO",
+    country: "Cyprus",
+    image: "/images/testimonials/1.jpg",
+    rating: 5,
+    date: "2024-01-01",
+    review:
+      "The villa was absolutely beautiful, just as it appears in the photos. Our host, Theofilis met us on arrival, to show us around. He was very warm...",
+  },
 ];
 
 export const RULES = [
