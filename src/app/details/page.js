@@ -24,6 +24,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { RULES } from "@/data/constants";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { amenities } from "@/data/constants";
+import { Check } from "lucide-react";
 
 export default function Details() {
   const { theme } = useTheme();
@@ -262,42 +265,29 @@ export default function Details() {
                 <h1 className="text-2xl font-bold">Amenities</h1>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <div className="flex gap-2">
-                  <span className="font-bold">Property Size:</span>
-                  <span>350 m2</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Bedrooms:</span>
-                  <span>3</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Bathrooms:</span>
-                  <span>3</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Outdoor Facilities:</span>
-                  <span>
-                    Pool, Outdoor Hot Tub, Sauna, BBQ Area, Seating Areas,
-                    Outdoor Dining
-                  </span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Check-In Time:</span>
-                  <span>14:00</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Check-Out Time:</span>
-                  <span>12:00</span>
-                </div>
-                <div className="flex gap-2">
-                  <span className="font-bold">Optional Services:</span>
-                  <span>
-                    Airport Transfer, Private Chef, Private Driver, Private
-                    Security, Private Yoga Instructor, Private Massage
-                  </span>
-                </div>
-              </div>
+              <ResponsiveMasonry
+                columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+              >
+                <Masonry>
+                  {amenities.map((category, i) => (
+                    <div key={i} className="flex flex-col gap-1 mt-4">
+                      <div className="flex items-center gap-3 text-xl ">
+                        <div>{category.icon}</div>
+                        <p>{category.label}</p>
+                      </div>
+                      {category.items.map((item, j) => (
+                        <div
+                          key={j}
+                          className="flex items-center gap-3 text-md text-zinc-700 p-1"
+                        >
+                          <Check />
+                          <p>{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </Masonry>
+              </ResponsiveMasonry>
             </MagicCard>
 
             <MagicCard

@@ -40,7 +40,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Amenities() {
   return (
@@ -88,33 +88,34 @@ export default function Amenities() {
                   All Amenities
                 </DialogTitle>
                 <DialogDescription>
-                Our amenities are unique and premium.
+                  Our amenities are unique and premium.
                 </DialogDescription>
               </DialogHeader>
               <ScrollArea className="h-[500px] p-4">
-              <ResponsiveMasonry
-                columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
-              >
-                <Masonry>
-                  {amenities.map((category, i) => (
-                    <div key={i} className="flex flex-col gap-1 mt-4">
-                      <div className="flex items-center gap-3 text-xl ">
-                        <div>{category.icon}</div>
-                        <p>{category.label}</p>
-                      </div>
-                      {category.items.map((item, j) => (
-                        <div
-                          key={j}
-                          className="flex items-center gap-3 text-md text-zinc-700 p-1"
-                        >
-                          <Check />
-                          <p>{item}</p>
+                <ResponsiveMasonry
+                  columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                >
+                  <Masonry>
+                    {amenities.map((category, i) => (
+                      <div key={i} className="flex flex-col gap-1 mt-4">
+                        <div className="flex items-center gap-3 text-xl ">
+                          <div>{category.icon}</div>
+                          <p>{category.label}</p>
                         </div>
-                      ))}
-                    </div>
-                  ))}
-                </Masonry>
-              </ResponsiveMasonry></ScrollArea>
+                        {category.items.map((item, j) => (
+                          <div
+                            key={j}
+                            className="flex items-center gap-3 text-md text-zinc-700 p-1"
+                          >
+                            <Check />
+                            <p>{item}</p>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </Masonry>
+                </ResponsiveMasonry>
+              </ScrollArea>
               <DialogFooter>
                 <Button type="submit">Close</Button>
               </DialogFooter>
