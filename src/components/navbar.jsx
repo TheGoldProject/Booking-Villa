@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useScroll } from "@/hooks/use-scroll";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const NavbarLinks = navbarLinks.map(({ label, link }) => {
   const [baseLink, hashLink] = link.split("#");
@@ -17,6 +18,7 @@ const NavbarLinks = navbarLinks.map(({ label, link }) => {
 });
 
 export default function Navbar() {
+  const { data: session } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -73,6 +75,17 @@ export default function Navbar() {
             )
           )}
         </nav>
+
+        {/* <nav>
+          {session ? (
+            <>
+              <p>Welcome, {session.user.name}</p>
+              <button onClick={() => signOut()}>Logout</button>
+            </>
+          ) : (
+            <button onClick={() => signIn()}>Login</button>
+          )}
+        </nav> */}
 
         {/* CTA Button */}
         {/* <Button size="sm" className="md:ml-4" onClick={(e) => scrollToSection(e, "contact")}>

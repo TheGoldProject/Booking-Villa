@@ -10,6 +10,8 @@ import Testimonials from "@/sections/home/testimonials";
 import CallToAction from "@/sections/home/call-to-action";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import { useBooking } from "@/components/context-provider";
+import { signIn } from "@/auth";
+import SignIn from "@/components/sign-in";
 
 export default function Home() {
   const { books, setBooks } = useBooking();
@@ -31,15 +33,13 @@ export default function Home() {
   }, []); // Re-fetch data
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 relative">
       <Hero />
       <div className="max-w-6xl mx-auto">
         <CallToAction />
         <About />
         <Amenities />
-        {/* <Rules /> */}
         <Testimonials />
-        <FloatingWhatsApp phoneNumber="5555555555" />
       </div>
     </div>
   );

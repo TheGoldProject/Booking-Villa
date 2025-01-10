@@ -53,10 +53,10 @@ export default function CallToAction() {
     date?.from &&
     date?.to && (
       <section id="call-to-action" className="pt-20">
-        <div class="bg-white py-6 sm:py-8 lg:py-12">
-          <div class="mx-auto max-w-screen-2xl shadow-lg">
-            <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
-              <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+        <div className="bg-white py-6 sm:py-8 lg:py-12">
+          <div className="mx-auto max-w-screen-2xl shadow-lg">
+            <div className="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+              <div className="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
                 <Image
                   src="/images/villa/40.jpg"
                   alt="Photo by Dom Hill"
@@ -66,9 +66,9 @@ export default function CallToAction() {
                   // className="object-cover object-center"
                 />
               </div>
-              <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+              <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
                 <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
-                  <h2 class="font-bold italic">Two Bedroom Villa</h2>
+                  <h2 className="font-bold italic">Two Bedroom Villa</h2>
                   <div className="flex items-center gap-1">
                     <p>(</p>
                     {/* <UserRound /> */}
@@ -112,7 +112,7 @@ export default function CallToAction() {
                   </div>
                 </div>
 
-                <div class="flex justify-end mt-auto">
+                <div className="flex justify-end mt-auto">
                   <Link href="/book">
                     <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
                       Reserve

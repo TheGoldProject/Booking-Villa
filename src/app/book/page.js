@@ -39,6 +39,12 @@ import {
 } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 const checkValidDateRange = (selected, bookedArray) => {
   if (!selected.from || !selected.to) {
@@ -93,11 +99,11 @@ export default function Book() {
 
   return (
     <div className="max-w-7xl mx-auto py-20">
-      <div class="mb-10 mt-10">
-        <h2 class="mb-4 text-center text-3xl font-extrabold italic text-gray-900 md:mb-6 lg:text-5xl">
+      <div className="mb-10 mt-10">
+        <h2 className="mb-4 text-center text-3xl font-extrabold italic text-gray-900 md:mb-6 lg:text-5xl">
           Book Now
         </h2>
-        <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-xl italic">
+        <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-xl italic">
           Book your appointment with us today and experience the best service in
           town.
         </p>
@@ -280,8 +286,8 @@ export default function Book() {
 
         {guests > 0 && date?.from && date?.to && (
           <div className="mt-10">
-            <div class="bg-white py-6 sm:py-8 lg:py-12">
-              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
+            <div className="bg-white py-6 sm:py-8 lg:py-12">
+              <div className="relative mx-auto max-w-screen-2xl shadow-lg">
                 <Image
                   src="/icons/hot.svg"
                   alt="Hot"
@@ -289,8 +295,8 @@ export default function Book() {
                   height={100}
                   className="absolute top-0 right-0"
                 />
-                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
-                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                <div className="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
+                  <div className="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
                     <Image
                       src="/images/villa/40.jpg"
                       alt="Photo by Dom Hill"
@@ -300,9 +306,9 @@ export default function Book() {
                       // className="object-cover object-center"
                     />
                   </div>
-                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                  <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
                     <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
-                      <h2 class="font-bold italic">Two Bedroom Villa</h2>
+                      <h2 className="font-bold italic">Two Bedroom Villa</h2>
                       <div className="flex items-center gap-1">
                         <p>(</p>
                         {/* <UserRound /> */}
@@ -350,7 +356,7 @@ export default function Book() {
                       </div>
                     </div>
 
-                    <div class="flex justify-end mt-auto">
+                    <div className="flex justify-end mt-auto">
                       <Link href="/book">
                         <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
                           Reserve
@@ -362,221 +368,603 @@ export default function Book() {
               </div>
             </div>
             <h1 className="text-3xl font-bold mt-10">Other Popular Options</h1>
-            <div class="bg-white py-6 sm:py-8 lg:py-12">
-              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
-                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
-                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
-                    <Image
-                      src="/images/villa/33.jpg"
-                      alt="Photo by Dom Hill"
-                      width={1000}
-                      height={500}
-                      // fill
-                      // className="object-cover object-center"
-                    />
+            <h2 className="text-xl font-bold mt-10">
+              Executive Two Bedroom Villa
+            </h2>
+            <div className="flex flex-col gap-4">
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-green-300">
+                  <CardTitle className="text-xl">Weekly Rate</CardTitle>
+                </CardHeader>
+                <div className="flex gap-4">
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                        <Image
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">
+                            Non-Refundable | Breakfast Included
+                          </h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Coffee />
+                            <p>Breakfast Included</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <RefreshCwOff size={20} />
+                            <p>Non-refundable</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
-                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
-                      <h2 class="font-bold italic">
-                        Executive Two Bedroom Villa
-                      </h2>
-                      <div className="flex items-center gap-1">
-                        <p>(</p>
-                        {/* <UserRound /> */}
-                        <p> {guests + 1} guests</p>
-                        <p>, {nights} nights</p>
-                        <p>)</p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-center gap-2">
-                      <p className="text-red-500 line-through">$2000</p>
-                      <p className="text-4xl font-bold">$1500</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2 mt-4">
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 1: King Bed</p>
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
                         <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 2: King Bed</p>
-                        <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
-                        />
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Check />
-                        <p>Free Cancellation Before 14 days</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Coffee />
-                        <p>Breakfast Included</p>
-                      </div>
-                    </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">Normal</h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
 
-                    <div class="flex justify-end mt-auto">
-                      <Link href="/book">
-                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
-                          Reserve
-                        </Button>
-                      </Link>
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Card>
+
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-cyan-300">
+                  <CardTitle className="text-xl">Standard Rate</CardTitle>
+                </CardHeader>
+                <div className="flex gap-4">
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                        <Image
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">
+                            Non-Refundable | Breakfast Included
+                          </h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Coffee />
+                            <p>Breakfast Included</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <RefreshCwOff size={20} />
+                            <p>Non-refundable</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                        <Image
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">Normal</h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
             </div>
 
-            <div class="bg-white py-6 sm:py-8 lg:py-12">
-              <div class="relative mx-auto max-w-screen-2xl shadow-lg">
-                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
-                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
-                    <Image
-                      src="/images/villa/34.jpg"
-                      alt="Photo by Dom Hill"
-                      width={1000}
-                      height={500}
-                      // fill
-                      // className="object-cover object-center"
-                    />
+
+            <h2 className="text-xl font-bold mt-10">
+              Executive Three Bedroom Villa
+            </h2>
+            <div className="flex flex-col gap-4">
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-green-300">
+                  <CardTitle className="text-xl">Weekly Rate</CardTitle>
+                </CardHeader>
+                <div className="flex gap-4">
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                        <Image
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">
+                            Non-Refundable | Breakfast Included
+                          </h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Coffee />
+                            <p>Breakfast Included</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <RefreshCwOff size={20} />
+                            <p>Non-refundable</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
-                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
-                      <h2 class="font-bold italic">Three Bedroom Villa</h2>
-                      <div className="flex items-center gap-1">
-                        <p>(</p>
-                        {/* <UserRound /> */}
-                        <p> 6 guests</p>
-                        <p>, {nights} nights</p>
-                        <p>)</p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-center gap-2">
-                      <p className="text-red-500 line-through">$2000</p>
-                      <p className="text-4xl font-bold">$1500</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2 mt-4">
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 1: King Bed</p>
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
                         <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 2: King Bed</p>
-                        <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
-                        />
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Check />
-                        <p>Free Cancellation Before 14 days</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Coffee />
-                        <p>Breakfast Included</p>
-                      </div>
-                    </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">Normal</h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
 
-                    <div class="flex justify-end mt-auto">
-                      <Link href="/book">
-                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
-                          Reserve
-                        </Button>
-                      </Link>
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </Card>
 
-            <div class="bg-white py-6 sm:py-8 lg:py-12">
-              <div class="mx-auto max-w-screen-2xl shadow-lg">
-                <div class="flex flex-col overflow-hidden rounded-lg bg-gray-200 sm:flex-row">
-                  <div class="order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
-                    <Image
-                      src="/images/villa/35.jpg"
-                      alt="Photo by Dom Hill"
-                      width={1000}
-                      height={500}
-                      // fill
-                      // className="object-cover object-center"
-                    />
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-cyan-300">
+                  <CardTitle className="text-xl">Standard Rate</CardTitle>
+                </CardHeader>
+                <div className="flex gap-4">
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
+                        <Image
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
+                        />
+                      </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">
+                            Non-Refundable | Breakfast Included
+                          </h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Coffee />
+                            <p>Breakfast Included</p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <RefreshCwOff size={20} />
+                            <p>Non-refundable</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
-                    <div className="flex items-center gap-3  md:text-2xl lg:text-3xl ">
-                      <h2 class="font-bold italic">
-                        Executive Three Bedroom Villa
-                      </h2>
-                      <div className="flex items-center gap-1">
-                        <p>(</p>
-                        {/* <UserRound /> */}
-                        <p> 6 guests</p>
-                        <p>, {nights} nights</p>
-                        <p>)</p>
-                      </div>
-                    </div>
 
-                    <div className="flex items-center gap-2">
-                      <p className="text-red-500 line-through">$2000</p>
-                      <p className="text-4xl font-bold">$1500</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2 mt-4">
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 1: King Bed</p>
+                  <div className="bg-white w-1/2">
+                    <div className="flex flex-col h-full overflow-hidden bg-gray-200 sm:flex-row">
+                      <div className="relative order-first h-48 w-full bg-gray-700 sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5">
                         <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
+                          src="/images/villa/33.jpg"
+                          alt="Photo by Dom Hill"
+                          // width={500}
+                          // height={1000}
+                          fill
+                          className="object-cover object-center"
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <p>Bedroom 2: King Bed</p>
-                        <Image
-                          src="/icons/bedroom.svg"
-                          alt="Check"
-                          width={20}
-                          height={20}
-                        />
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Check />
-                        <p>Free Cancellation Before 14 days</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Coffee />
-                        <p>Breakfast Included</p>
-                      </div>
-                    </div>
+                      <div className="flex w-full flex-col p-4 sm:w-1/2 sm:p-8 lg:w-3/5">
+                        <div className="flex flex-col gap-1  text-xl ">
+                          <h2 className="font-bold italic">Normal</h2>
+                          <div className="flex items-center gap-1">
+                            <p>(</p>
+                            {/* <UserRound /> */}
+                            <p> {guests + 1} guests</p>
+                            <p>, {nights} nights</p>
+                            <p>)</p>
+                          </div>
+                        </div>
 
-                    <div class="flex justify-end mt-auto">
-                      <Link href="/book">
-                        <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
-                          Reserve
-                        </Button>
-                      </Link>
+                        <div className="flex items-center gap-2">
+                          <p className="text-red-500 line-through">$2000</p>
+                          <p className="text-4xl font-bold">$1500</p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 1: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <p>Bedroom 2: King Bed</p>
+                            <Image
+                              src="/icons/bedroom.svg"
+                              alt="Check"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 text-green-600">
+                            <Check />
+                            <p>Free Cancellation Before 14 days</p>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-auto">
+                          <Link href="/book">
+                            <Button className="bg-cyan-500 text-white w-60 h-12 text-xl">
+                              Reserve
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Card>
             </div>
           </div>
         )}

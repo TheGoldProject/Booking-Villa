@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useState } from "react";
 import { useTheme } from "next-themes";
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 import Image from "next/image";
@@ -27,41 +27,58 @@ import { RULES } from "@/data/constants";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { amenities } from "@/data/constants";
 import { Check } from "lucide-react";
+import GalleryModal from "@/components/gallery-modal";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import { Card } from "@/components/ui/card";
+import CallToAction from "@/sections/home/call-to-action";
 
 export default function Details() {
   const { theme } = useTheme();
+  const [open, setOpen] = useState({ open: false, category: "Living Areas" });
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+
   return (
     <div className="pb-20">
       <div className="flex flex-col gap-20 w-3/5 mx-auto">
+        <CallToAction />
+
         <section id="description" className="mt-20">
-          <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <div class="mx-auto max-w-screen-xl px-4 md:px-8">
-              <div class="mb-10 md:mb-16">
-                <h2 class="mb-4 text-center text-3xl font-extrabold italic text-gray-900 md:mb-6 lg:text-5xl">
+          <div className="bg-white py-6 sm:py-8 lg:py-12">
+            <div className="mx-auto max-w-screen-xl px-4 md:px-8">
+              <div className="mb-10 md:mb-16">
+                <h2 className="mb-4 text-center text-3xl font-extrabold italic text-gray-900 md:mb-6 lg:text-5xl">
                   TG Villa
                 </h2>
 
-                <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-xl italic">
+                <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-xl italic">
                   The most beautiful villa in the Cyprus
                 </p>
               </div>
 
-              <div class="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0 md:divide-x">
-                <div class="flex flex-col items-center gap-2 md:p-4">
+              <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0 md:divide-x">
+                <div className="flex flex-col items-center gap-2 md:p-4">
                   <School className=" text-cyan-500 w-10 h-10" />
-                  <div class="text-2xl font-semibold">Villa</div>
+                  <div className="text-2xl font-semibold">Villa</div>
                 </div>
-                <div class="flex flex-col items-center gap-2 md:p-4">
+                <div className="flex flex-col items-center gap-2 md:p-4">
                   <UserRound className=" text-cyan-500 w-10 h-10" />
-                  <div class="text-2xl font-semibold">Up to 6 people</div>
+                  <div className="text-2xl font-semibold">Up to 6 people</div>
                 </div>
-                <div class="flex flex-col items-center gap-2 md:p-4">
+                <div className="flex flex-col items-center gap-2 md:p-4">
                   <BedDouble className=" text-cyan-500 w-10 h-10" />
-                  <div class="text-2xl font-semibold">3 Bedrooms</div>
+                  <div className="text-2xl font-semibold">3 Bedrooms</div>
                 </div>
-                <div class="flex flex-col items-center gap-2 md:p-4">
+                <div className="flex flex-col items-center gap-2 md:p-4">
                   <Bath className=" text-cyan-500 w-10 h-10" />
-                  <div class="text-2xl font-semibold">3 Bathrooms</div>
+                  <div className="text-2xl font-semibold">3 Bathrooms</div>
                 </div>
               </div>
             </div>
@@ -127,48 +144,56 @@ export default function Details() {
           </div>
 
           <div className="flex flex-col gap-10 mt-10">
-            <MagicCard
-              className="cursor-pointer p-5 whitespace-nowrap"
-              gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
-            >
+            <Card className="cursor-pointer p-5 whitespace-nowrap">
               <div className="flex gap-2 items-center mb-10">
                 <BedDouble />
                 <h1 className="text-2xl font-bold">Sleeping Situation</h1>
               </div>
 
               <div className="flex gap-5">
-                <div className="flex flex-col items-center gap-2">
-                  <p className="text-xl font-bold">Bedroom 1</p>
-                  <Image
-                    src="/images/villa/4.jpg"
-                    alt="Bedroom 1"
-                    className="rounded-lg"
-                    width={300}
-                    height={300}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <p className="text-xl font-bold">Bedroom 2</p>
-                  <Image
-                    src="/images/villa/6.jpg"
-                    alt="Bedroom 1"
-                    className="rounded-lg"
-                    width={300}
-                    height={300}
-                  />
-                </div>
-                <div className="flex flex-col items-center gap-2">
-                  <p className="text-xl font-bold">Bedroom 3</p>
-                  <Image
-                    src="/images/villa/34.jpg"
-                    alt="Bedroom 1"
-                    className="rounded-lg"
-                    width={300}
-                    height={300}
-                  />
-                </div>
+                {Array.from({ length: 3 }).map((item, index) => (
+                  <div key={index}>
+                    <div className="flex flex-col items-center gap-2 w-[300px]">
+                      <p className="text-xl font-bold">Bedroom {index + 1}</p>
+                      <div className="relative group">
+                        <Carousel
+                          plugins={[plugin.current]}
+                          className="w-full"
+                          onMouseEnter={plugin.current.stop}
+                          onMouseLeave={plugin.current.reset}
+                          opts={{
+                            align: "start",
+                            loop: true,
+                          }}
+                        >
+                          <CarouselContent>
+                            {Array.from({ length: 5 }).map((item, j) => (
+                              <CarouselItem key={j}>
+                                <Image
+                                  src={`/images/villa/${j + index * 2 + 5}.jpg`}
+                                  alt={`gallery${j}`}
+                                  width={300}
+                                  height={300}
+                                  className="rounded-lg"
+                                  onClick={() =>
+                                    setOpen({
+                                      open: true,
+                                      category: "Bedrooms",
+                                    })
+                                  }
+                                />
+                              </CarouselItem>
+                            ))}
+                          </CarouselContent>
+                          <CarouselPrevious className="left-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                          <CarouselNext className="right-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                        </Carousel>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </MagicCard>
+            </Card>
 
             <MagicCard
               className="cursor-pointer whitespace-nowrap w-full"
@@ -317,6 +342,11 @@ export default function Details() {
           </div>
         </section>
       </div>
+      <GalleryModal
+        open={open.open}
+        setOpen={setOpen}
+        category={open.category}
+      />
     </div>
   );
 }

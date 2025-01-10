@@ -3,7 +3,10 @@ import Footer from "@/components/footer";
 import { Playfair_Display, Lato, Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BookingProvider } from "@/components/context-provider";
+import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
+import { FloatingWhatsApp } from "react-floating-whatsapp";
+import { FloatReserveCard } from "@/components/float-reserve-card";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -30,15 +33,19 @@ export default function RootLayout({ children }) {
       <body
         className={`${playfair.variable} ${lato.variable} ${poppins.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <BookingProvider>
-            <div className="min-h-screen flex flex-col">
-              <Navbar />
-              {children}
-              <Footer />
-            </div>
-          </BookingProvider>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <BookingProvider>
+              <div className="min-h-screen flex flex-col">
+                <Navbar />
+                {children}
+                <Footer />
+                <FloatReserveCard />
+                {/* <FloatingWhatsApp phoneNumber="5555555555" /> */}
+              </div>
+            </BookingProvider>
+          </ThemeProvider>
+        </SessionProvider>
         <Toaster />
       </body>
     </html>

@@ -1,8 +1,5 @@
 "use client";
 import { useState, useRef } from "react";
-// import MorphingText from "@/components/ui/morphing-text";
-// import { hero } from "@/data/texts";
-import InteractiveHoverButton from "@/components/ui/interactive-hover-button";
 import { Button } from "@/components/ui/button";
 import {
   MapPin,
@@ -13,17 +10,8 @@ import {
   Car,
   Bath,
   TableTennis,
+  Images,
 } from "lucide-react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import {
   Carousel,
   CarouselContent,
@@ -47,6 +35,7 @@ import BookForm from "@/components/book-form";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
 import { premiumServices } from "@/data/constants";
+import GalleryModal from "@/components/gallery-modal";
 
 const reviews = [
   {
@@ -72,6 +61,8 @@ const reviews = [
 export default function About() {
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
+  const [open, setOpen] = useState(false);
+
   return (
     <section id="gallery" className="mt-20">
       <p className="text-3xl font-bold mb-4">
@@ -91,37 +82,62 @@ export default function About() {
                 )}
               >
                 <BlurFade delay={0.25 + index * 0.05} inView>
-                  <Link href="/gallery">
-                    <AspectRatio ratio={4 / 3}>
-                      <Image
-                        src={`/images/villa/${index + 5}.jpg`}
-                        alt={`gallery${index}`}
-                        fill
-                        className="object-cover rounded-md transition-all duration-500 hover:scale-110"
-                      />
-                    </AspectRatio>
-                  </Link>
+                  <Carousel
+                    plugins={[plugin.current]}
+                    className="w-full group"
+                    onMouseEnter={plugin.current.stop}
+                    onMouseLeave={plugin.current.reset}
+                    opts={{
+                      align: "start",
+                      loop: true,
+                    }}
+                  >
+                    <CarouselContent>
+                      {Array.from({ length: 5 }).map((item, j) => (
+                        <CarouselItem key={j}>
+                          <AspectRatio ratio={4 / 3}>
+                            <Image
+                              src={`/images/villa/${j + 5}.jpg`}
+                              alt={`gallery${j}`}
+                              fill
+                              className="object-cover rounded-md transition-all duration-500 hover:scale-110"
+                            />
+                          </AspectRatio>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-2 transition-all duration-300 group-hover:opacity-100 opacity-0" />
+                    <CarouselNext className="right-2 transition-all duration-300 group-hover:opacity-100 opacity-0" />
+                  </Carousel>
                 </BlurFade>
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-5 grid-rows-1 gap-4 cursor-pointer">
+          <div className="grid grid-cols-5 grid-rows-1 gap-4 cursor-pointer relative">
             {Array.from({ length: 5 }).map((item, index) => (
               <div key={index} className={cn("rounded-lg overflow-hidden")}>
                 <BlurFade delay={0.25 + index * 0.05} inView>
-                  <Link href="/gallery">
-                    <AspectRatio ratio={1 / 1}>
-                      <Image
-                        src={`/images/villa/${index + 11}.jpg`}
-                        alt={`gallery${index}`}
-                        fill
-                        className="object-cover rounded-md transition-all duration-500 hover:scale-110"
-                      />
-                    </AspectRatio>
-                  </Link>
+                  <AspectRatio ratio={1 / 1}>
+                    <Image
+                      src={`/images/villa/${index + 11}.jpg`}
+                      alt={`gallery${index}`}
+                      fill
+                      className="object-cover rounded-md transition-all duration-500 hover:scale-110"
+                    />
+                  </AspectRatio>
                 </BlurFade>
               </div>
             ))}
+            <div className="absolute bottom-2 right-2">
+              <Button
+                variant="outline"
+                className="border border-black"
+                onClick={() => setOpen(true)}
+              >
+                <Images />
+                View All
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -346,6 +362,8 @@ export default function About() {
           </Card>
         </div>
       </div>
+
+      <GalleryModal open={open} setOpen={setOpen} />
     </section>
   );
 }
