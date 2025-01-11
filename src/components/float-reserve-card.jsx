@@ -22,7 +22,7 @@ export function FloatReserveCard() {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="fixed bottom-4 left-4 w-8 h-8 rounded-full border border-black"
+          className="fixed bottom-4 left-4 w-8 h-8 rounded-full border border-black z-20"
           onClick={() => setOpen(!open)}
         >
           {open ? <X /> : <ShoppingCart />}
@@ -47,7 +47,7 @@ export function FloatReserveCard() {
               <div className="flex items-center gap-1">
                 <p>(</p>
                 {/* <UserRound /> */}
-                <p> {guests + 1} guests</p>
+                <p> {guests} guests</p>
                 <p>, {nights} nights</p>
                 <p>)</p>
               </div>

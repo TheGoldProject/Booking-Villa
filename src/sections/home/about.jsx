@@ -117,18 +117,31 @@ export default function About() {
             {Array.from({ length: 5 }).map((item, index) => (
               <div key={index} className={cn("rounded-lg overflow-hidden")}>
                 <BlurFade delay={0.25 + index * 0.05} inView>
-                  <AspectRatio ratio={1 / 1}>
-                    <Image
-                      src={`/images/villa/${index + 11}.jpg`}
-                      alt={`gallery${index}`}
-                      fill
-                      className="object-cover rounded-md transition-all duration-500 hover:scale-110"
-                    />
-                  </AspectRatio>
+                  <div className="relative">
+                    <AspectRatio ratio={1 / 1}>
+                      <Image
+                        src={`/images/villa/${index + 14}.jpg`}
+                        alt={`gallery${index}`}
+                        fill
+                        className="object-cover rounded-md transition-all duration-500 hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/40" />
+                    </AspectRatio>
+                    {index == 4 && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <p
+                          className="text-white underline text-2xl"
+                          onClick={() => setOpen(true)}
+                        >
+                          +40 Photos
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </BlurFade>
               </div>
             ))}
-            <div className="absolute bottom-2 right-2">
+            {/* <div className="absolute bottom-2 right-2">
               <Button
                 variant="outline"
                 className="border border-black"
@@ -137,7 +150,7 @@ export default function About() {
                 <Images />
                 View All
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
 
