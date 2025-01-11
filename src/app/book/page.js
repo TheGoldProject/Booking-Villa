@@ -397,7 +397,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -470,7 +470,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -544,7 +544,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -617,7 +617,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -697,7 +697,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -770,7 +770,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -844,7 +844,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
@@ -917,7 +917,7 @@ export default function Book() {
                           <div className="flex items-center gap-1">
                             <p>(</p>
                             {/* <UserRound /> */}
-                            <p> {guests + 1} guests</p>
+                            <p> {guests} guests</p>
                             <p>, {nights} nights</p>
                             <p>)</p>
                           </div>
