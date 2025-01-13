@@ -367,7 +367,7 @@ export default function Book() {
                 </div>
               </div>
             </div>
-            <h1 className="text-3xl font-bold mt-10">Other Popular Options</h1>
+            <h1 className="text-3xl font-bold mt-10">Available Options</h1>
             <h2 className="text-xl font-bold mt-10">
               Executive Two Bedroom Villa
             </h2>

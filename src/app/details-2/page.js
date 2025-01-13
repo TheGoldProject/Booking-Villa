@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/carousel";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import CallToAction from "@/sections/home/call-to-action";
 
 export default function Details() {
@@ -151,47 +151,69 @@ export default function Details() {
               </div>
 
               <div className="flex gap-5">
-                {Array.from({ length: 3 }).map((item, index) => (
-                  <div key={index}>
-                    <div className="flex flex-col items-center gap-2 w-[300px]">
-                      <p className="text-xl font-bold">Bedroom {index + 1}</p>
-                      <div className="relative group">
-                        <Carousel
-                          plugins={[plugin.current]}
-                          className="w-full"
-                          onMouseEnter={plugin.current.stop}
-                          onMouseLeave={plugin.current.reset}
-                          opts={{
-                            align: "start",
-                            loop: true,
-                          }}
-                        >
-                          <CarouselContent>
-                            {Array.from({ length: 5 }).map((item, j) => (
-                              <CarouselItem key={j}>
-                                <Image
-                                  src={`/images/villa/${j + index * 2 + 5}.jpg`}
-                                  alt={`gallery${j}`}
-                                  width={300}
-                                  height={300}
-                                  className="rounded-lg"
-                                  onClick={() =>
-                                    setOpen({
-                                      open: true,
-                                      category: "Bedrooms",
-                                    })
-                                  }
-                                />
-                              </CarouselItem>
-                            ))}
-                          </CarouselContent>
-                          <CarouselPrevious className="left-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
-                          <CarouselNext className="right-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
-                        </Carousel>
-                      </div>
-                    </div>
+                <Carousel
+                  opts={{
+                    align: "start",
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <CarouselItem
+                        key={index}
+                        className="md:basis-1/2 lg:basis-1/3"
+                      >
+                        <div key={index}>
+                          <div className="flex flex-col items-center gap-2 w-[300px]">
+                            <p className="text-xl font-bold">
+                              Bedroom {index + 1}
+                            </p>
+                            <div className="relative group">
+                              <Carousel
+                                plugins={[plugin.current]}
+                                className="w-full"
+                                onMouseEnter={plugin.current.stop}
+                                onMouseLeave={plugin.current.reset}
+                                opts={{
+                                  align: "start",
+                                  loop: true,
+                                }}
+                              >
+                                <CarouselContent>
+                                  {Array.from({ length: 5 }).map((item, j) => (
+                                    <CarouselItem key={j}>
+                                      <Image
+                                        src={`/images/villa/${
+                                          j + index * 2 + 5
+                                        }.jpg`}
+                                        alt={`gallery${j}`}
+                                        width={300}
+                                        height={300}
+                                        className="rounded-lg"
+                                        onClick={() =>
+                                          setOpen({
+                                            open: true,
+                                            category: "Bedrooms",
+                                          })
+                                        }
+                                      />
+                                    </CarouselItem>
+                                  ))}
+                                </CarouselContent>
+                                <CarouselPrevious className="left-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <CarouselNext className="right-2 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                              </Carousel>
+                            </div>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex gap-2 absolute -top-12 right-12">
+                    <CarouselPrevious className="relative translate-y-0 left-0" />
+                    <CarouselNext className="relative translate-y-0 right-0" />
                   </div>
-                ))}
+                </Carousel>
               </div>
             </Card>
 
